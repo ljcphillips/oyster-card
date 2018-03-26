@@ -11,6 +11,10 @@ class Oystercard
     @balance += amount
   end
 
+  def deduct(amount)
+    @balance -= amount
+  end
+
   private
 
   def too_high_balance_error
