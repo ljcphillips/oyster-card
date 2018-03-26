@@ -16,4 +16,10 @@ describe Oystercard do
     expect(oystercard.balance).to eq 10
   end
 
+  it "errors when too much money" do
+    message = "You can not have more than 90 on your card"
+    oystercard.balance = 90
+    expect { oystercard.top_up(1) }.to raise_error message
+  end
+
 end
