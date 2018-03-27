@@ -12,8 +12,10 @@ p oystercard.balance
 
 p oystercard.entry_station
 
-p oystercard.touch_out
+p oystercard.touch_out("Whitechapel")
 
 p oystercard.balance
 
 p oystercard.entry_station
+
+oystercard.print_journeys
