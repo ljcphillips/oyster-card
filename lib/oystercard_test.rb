@@ -6,10 +6,14 @@ p oystercard.in_journey?
 
 p oystercard.top_up(10)
 
-p oystercard.touch_in
+p oystercard.touch_in("Aldgate East")
 
 p oystercard.balance
+
+p oystercard.entry_station
 
 p oystercard.touch_out
 
 p oystercard.balance
+
+p oystercard.entry_station
