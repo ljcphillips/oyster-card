@@ -2,6 +2,7 @@ class Oystercard
 
   MAXIMUM_BALANCE = 90
   MINIMUM_BALANCE = 1
+  MINIMUM_FARE = 1
   attr_accessor :balance
   attr_accessor :journey
 
@@ -14,10 +15,6 @@ class Oystercard
     @balance += amount
   end
 
-  def deduct(amount)
-    @balance -= amount
-  end
-
   def in_journey?
     !!@journey
   end
@@ -28,10 +25,15 @@ class Oystercard
   end
 
   def touch_out
+    deduct(MINIMUM_FARE)
     @journey = false
   end
 
-  private
+private
+
+  def deduct(amount)
+    @balance -= amount
+  end
 
   def too_high_balance_error
     raise "You can not have more than 90 on your card"

@@ -8,4 +8,8 @@ p oystercard.top_up(10)
 
 p oystercard.touch_in
 
+p oystercard.balance
+
 p oystercard.touch_out
+
+p oystercard.balance

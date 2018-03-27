@@ -21,9 +21,8 @@ describe Oystercard do
 
     it "deducts from the balance" do
       oystercard.balance = 50
-      oystercard.deduct(10)
+      oystercard.send(:deduct, 10)
       expect(oystercard.balance).to eq 40
-
     end
 
   end
@@ -57,4 +56,11 @@ describe Oystercard do
 
   end
 
+  describe '#touch_out' do
+
+    it "expects balance to reduce after touching out" do
+      expect{oystercard.touch_out}.to change{oystercard.balance}.by(-Oystercard::MINIMUM_FARE)
+    end
+
+  end
 end
