@@ -23,10 +23,28 @@ describe Oystercard do
       oystercard.balance = 50
       oystercard.deduct(10)
       expect(oystercard.balance).to eq 40
-      
+
     end
 
   end
 
+  describe '#in_journey?' do
+
+    it "expects new instance of oystercard to not be in journey" do
+      expect(oystercard).not_to be_in_journey
+    end
+
+    it "expects oystercard to be in journey after touching in" do
+      oystercard.touch_in
+      expect(oystercard).to be_in_journey
+    end
+
+    it "expects oystercard to not be in journey after touching out" do
+        oystercard.touch_in
+        oystercard.touch_out
+        expect(oystercard).not_to be_in_journey
+    end
+
+  end
 
 end
