@@ -35,14 +35,24 @@ describe Oystercard do
     end
 
     it "expects oystercard to be in journey after touching in" do
+      oystercard.top_up(10)
       oystercard.touch_in
       expect(oystercard).to be_in_journey
     end
 
     it "expects oystercard to not be in journey after touching out" do
+        oystercard.top_up(10)
         oystercard.touch_in
         oystercard.touch_out
         expect(oystercard).not_to be_in_journey
+    end
+
+  end
+
+  describe '#touch_in' do
+
+    it "expects error if touching in with low balance" do
+      expect{oystercard.touch_in}.to raise_error
     end
 
   end
