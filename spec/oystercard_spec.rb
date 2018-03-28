@@ -3,6 +3,7 @@ require "oystercard"
 describe Oystercard do
   subject(:oystercard) { described_class.new }
     let(:entry_station) { double :entry_station }
+    let(:exit_station) { double :exit_station }
 
   describe '#top_up' do
     it "adds funds when topping up" do
@@ -43,7 +44,7 @@ describe Oystercard do
     it "expects oystercard to not be in journey after touching out" do
         oystercard.top_up(10)
         oystercard.touch_in(entry_station)
-        oystercard.touch_out
+        oystercard.touch_out(exit_station)
         expect(oystercard).not_to be_in_journey
     end
 
@@ -66,7 +67,22 @@ describe Oystercard do
   describe '#touch_out' do
 
     it "expects balance to reduce after touching out" do
-      expect{oystercard.touch_out}.to change{oystercard.balance}.by(-Oystercard::MINIMUM_FARE)
+      expect{oystercard.touch_out(exit_station)}.to change{oystercard.balance}.by(-Oystercard::MINIMUM_FARE)
+    end
+
+  end
+
+  describe '#journey_history' do
+
+    it "expects journey_history to be empty by default" do
+      expect(oystercard.journey_history).to eq []
+    end
+
+    it "expects touching in and out to create one journey" do
+      oystercard.top_up(10)
+      oystercard.touch_in(entry_station)
+      oystercard.touch_out(exit_station)
+      expect(oystercard.journey_history).to eq [{:entry=>entry_station, :exit=>exit_station}]
     end
 
   end

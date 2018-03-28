@@ -5,6 +5,7 @@ class Oystercard
   MINIMUM_FARE = 1
   attr_accessor :balance
   attr_accessor :entry_station
+  attr_accessor :journey_history
 
   def initialize
     @balance = 0
@@ -23,14 +24,13 @@ class Oystercard
   def touch_in(entry_station)
     too_low_balance_error if balance_too_low
     @entry_station = entry_station
-    @journey_history.push(@entry_station)
   end
 
   def touch_out(exit_station)
     deduct(MINIMUM_FARE)
-    @entry_station = nil
     @exit_station = exit_station
-    @journey_history.push(@exit_station)
+    @journey_history << {entry: entry_station, exit: @exit_station}
+    @entry_station = nil
   end
 
   def print_journeys
